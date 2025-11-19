@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>AquaTech | Cadastro</title>
+    <title>the birkin | Cadastro</title>
 
     <script src="./js/sessao.js"></script>
 
@@ -24,13 +24,13 @@
       <div class="container">
         <div class="card card-cadastro">
           <div class="formulario">
-            <h2>Bem-vindo!</h2>
+           
             <!--
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
             <div id="esquerda"><img src="./fotos/cadastro.jpg" alt=""></div>
-             <span>Cadastro</span>
+            
             <div id="direta">
               <div class="campo">
                 <span>Nome</span>
@@ -76,10 +76,11 @@
       </div>
     </div>
 
+<div class="links-abaixo">
+    <a href="./index.html">Voltar ao site</a>
+    <a href="./login.html">Ir para o login</a>
+</div>
 
-   <a href="./index.html">voltar ao site</a>
-   <a href="./login.html">ir para o login</a>
-  </body>
 </html>
 
 <script>
@@ -109,8 +110,8 @@
       salarioVar == ""
     ) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+      /*mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";*/
 
       finalizarAguardar();
       return false;
