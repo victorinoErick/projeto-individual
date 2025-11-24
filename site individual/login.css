@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+
+.card-login {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+.formulario {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 140px;  
+}
+
+
+.card-login h2 {
+    font-size: 36px;
+    color: #9a4e22;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.campo span {
+    font-size: 16px;
+    color: #9a4e22;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.campo input {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 40px;
+    background: #dedede;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.botao {
+    width: 220px;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 40px;
+    background: #e86e2f;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: center;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: #cf5f23;
+}
+
+
+#cadastre-se {
+    font-style: italic;
+    margin-top: 30px;
+    font-size: 14px;
+    text-align: center;
+    color: #9a4e22;
+    font-weight: 500;
+    display: block;
+    text-decoration: none;
+}
+
+
+#voltarSite {
+    position: absolute;
+    bottom: 27px;
+    left: 27px;
+    font-size: 19px;
+    text-decoration: none;
+    color: #e86e2f;
+    padding: 7px 22px;
+    border-radius: 20px;
+    border: 2px solid #e86e2f;
+    transition: .2s;
+}
+
+#voltarSite:hover {
+    background: #e86e2f;
+    color: white;
+}
+
+
+#imagem {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-right: -40%;
+}
+
+
+.alerta_erro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card_erro {
+    background-color: #ffcece;
+    color: #ff0000;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    display: none;
+}
