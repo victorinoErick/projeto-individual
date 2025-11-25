@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>the birkin | Cadastro</title>
+
+    <link rel="stylesheet" href="./css/cadastro.css" />
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
+
+  <body>
+    <div class="login">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card card-cadastro">
+          <div class="formulario">
+           
+            <!--
+                         Para inserir mais um campo, copie uma das inputs abaixo.
+                         Assim que inserir vá para o script abaixo.
+                     -->
+            <div id="esquerda"><img src="./fotos/cadastro.jpg" alt=""></div>
+            
+            <div id="direta">
+              <div class="campo">
+                <span>Nome </span>
+                <input
+                  id="ipt_nome"
+                  type="text"
+                  placeholder="seu nome..."
+                />
+              </div>
+              <div class="campo">
+                <span>sobrenome:</span>
+                <input id="ipt_sobrenome" type="text" placeholder="seu sobrenome..." />
+              </div>
+              <div class="campo">
+                <span>E-mail:</span>
+                <input
+                  id="ipt_email"
+                  type="text"
+                  placeholder="meuemail@provedor.com"
+                />
+              </div>
+              <div class="campo">
+                <span>Senha:</span>
+                <input id="ipt_senha" type="password" placeholder="******" />
+              </div>
+              <div class="campo">
+                <span>Confirmação da Senha:</span>
+                <input
+                  id="confirmacao_senha_input"
+                  type="password"
+                  placeholder="******"
+                />
+              </div>
+               <div class="campo">
+                <span>quanto você ganha?:</span>
+                <input id="ipt_salario" type="text" placeholder="ex: R$20,000" />
+              </div>
+              <button class="botao" onclick="cadastrar()">Cadastrar</button>
+<div class="links-abaixo">
+    <a href="./index.html">Voltar ao site</a>
+    <a href="./login.html">Ir para o login</a>
+</div>
+
+            </div>
+            <div id="mensagem_erro"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</html>
+
+<script>
+
+ 
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = ipt_nome.value;
+    var sobrenome = ipt_sobrenome.value;
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_senha.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var tktmedio= ipt_salario.value;
+   
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      sobrenome == ""||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      tktmedio == ""
+    ) {
+      cardErro.style.display = "block";
+      /*mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";*/
+
+      /*finalizarAguardar();*/
+      
+      return false;
+    } 
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+     /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id;
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }
+      */
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        sobrenomeServer: sobrenome,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        salarioServer: tktmedio,
+      }),
+    }).then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+          
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        
+      });
+
+    return false;
+  }
+
+  
+  
+</script>
