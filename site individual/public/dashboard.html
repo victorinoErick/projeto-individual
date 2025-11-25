@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Frizza</title>
+
+    <link rel="stylesheet" href="./css/dashboards.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+      
+        <aside class="sidebar">
+            <div class="user-box">
+                <p>ola frizza!<br>bem vindo de<br>volta</p>
+            </div>
+
+            <nav>
+               <a href="./simulador.html">calculadora</a>
+               <a href="./index.html">sair</a>
+            </nav>
+        </aside>
+
+        
+        <main class="conteudo">
+
+            
+            <section class="cards">
+                <div class="card">
+                    <h3>Ticket médio</h3>
+                    <p>R$60,000</p>
+                </div>
+
+                <div class="card">
+                    <h3>Valorização média:</h3>
+                    <p>59%</p>
+                </div>
+
+                <div class="card">
+                    <h3>Maior valorização registrada:</h3>
+                    <p>96%</p>
+                </div>
+
+                <div class="card">
+                    <h3>total de bolsas :</h3>
+                    <p>6</p>
+                </div>
+            </section>
+
+            
+            <section class="grid-graficos">
+
+                <div class="grafico-container">
+                    <h3>couros</h3>
+                      crocodilo
+                    avestruz
+                    lagarto
+                    bezerro
+                    <canvas id="graficoCouros"></canvas>
+                </div>
+
+                <div class="grafico-container">
+                    <h3>hardware</h3>
+                    <canvas id="graficoHardware"></canvas>
+                </div>
+
+                <div class="grafico-container">
+                    <h3>tamanho</h3>
+                    <canvas id="graficoTamanho"></canvas>
+                </div>
+
+                <div class="grafico-container">
+                    <h3>valor pago X valor possível venda</h3>
+                    <canvas id="graficoValor"></canvas>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+   
+    <script>
+        function criarGrafico(idCanvas, tipo, labels, dados, cores=null) {
+            const ctx = document.getElementById(idCanvas);
+
+            return new Chart(ctx, {
+                type: tipo,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dados,
+                        backgroundColor: cores ??
+                            ['orange', '#b34708', '#ff7b00', '#a52a2a'],
+                        borderRadius: 10,
+                        borderSkipped: false,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                    },
+                    scales: tipo !== "doughnut" ? {
+                        x: { grid: { display: false } },
+                        y: { beginAtZero: true }
+                    } : {}
+                }
+            });
+        }
+
+       
+        criarGrafico(
+            "graficoCouros",
+            'doughnut',
+            ["bezerro", "crocodilo", "avestruz", "lagarto"],
+            [20, 25, 30, 35]
+        );
+
+       
+        criarGrafico(
+            "graficoTamanho",
+            'bar',
+            ["20 cm", "25 cm", "30 cm", "35 cm"],
+            [2, 8, 5, 7]
+        );
+
+       
+        criarGrafico(
+            "graficoHardware",
+            'bar',
+            ["paladium", "gold", "rose gold", "elecritum", "diamond"],
+            [4, 8, 10, 6, 4]
+        );
+
+       
+        criarGrafico(
+            "graficoValor",
+            'bar',
+            ["valor pago", "valor valorizado"],
+            [60000, 96000]
+        );
+    </script>
+
+</body>
+</html>

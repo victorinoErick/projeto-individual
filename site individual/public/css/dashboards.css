@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    overflow: hidden; /* Sem rolagem */
+}
+
+/* CONTAINER GERAL */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh; 
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: #f07e33;
+    width: 200px;
+    height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    font-size: 18px;
+}
+
+.sidebar nav a {
+    display: block;
+    margin-bottom: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+/* CONTEÚDO */
+.conteudo {
+    flex: 1;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* TOP CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: #f5a066;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 18px;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* GRID DE GRAFICOS — ESTE ERA O PROBLEMA */
+.grid-graficos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 265px; /* Altura IDÊNTICA da foto */
+    gap: 30px;
+}
+
+/* CONTAINER DE CADA GRAFICO */
+.grafico-container {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #00000015;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+   
+}
+
+
+.grafico-container h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-transform: lowercase;
+}
+
+#graficoCouros{
+    margin-bottom: 100%;
+}
+
+
