@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,50 +14,50 @@
 
     <div class="container">
 
-      
+
         <aside class="sidebar">
             <div class="user-box">
-                <p>ola frizza!<br>bem vindo de<br>volta</p>
+                <p>ola <span id="div_nome">frizza</span>!<br>bem vindo de<br>volta</p>
             </div>
 
             <nav>
-               <a href="./simulador.html">calculadora</a>
-               <a href="./index.html">sair</a>
+                <a href="./simulador.html">calculadora</a>
+                <a href="./index.html">sair</a>
             </nav>
         </aside>
 
-        
+
         <main class="conteudo">
 
-            
+
             <section class="cards">
                 <div class="card">
                     <h3>Ticket médio</h3>
-                    <p>R$60,000</p>
+                    <p id="div_ticket">R$60,000</p>
                 </div>
 
                 <div class="card">
                     <h3>Valorização média:</h3>
-                    <p>59%</p>
+                    <p id="div_valorizacao_media">59%</p>
                 </div>
 
                 <div class="card">
                     <h3>Maior valorização registrada:</h3>
-                    <p>96%</p>
+                    <p id="div_maior_valorizacao">96%</p>
                 </div>
 
                 <div class="card">
                     <h3>total de bolsas :</h3>
-                    <p>6</p>
+                    <p id="div_total_bolsas">6</p>
                 </div>
             </section>
 
-            
+
             <section class="grid-graficos">
 
                 <div class="grafico-container">
                     <h3>couros</h3>
-                      crocodilo
+                    crocodilo
                     avestruz
                     lagarto
                     bezerro
@@ -83,9 +84,65 @@
         </main>
     </div>
 
-   
+
     <script>
-        function criarGrafico(idCanvas, tipo, labels, dados, cores=null) {
+        var qtdCm20 = 0
+        var qtdCm25 = 0
+        var qtdCm30 = 0
+        var qtdCm35 = 0
+
+        function carregarDados() {
+            fetch(`/simulador/listar`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        resposta.json().then(dados => {
+                            for (var i = 0; i < dados.length; i++) {
+                                if (dados[i].tamanho == 1) {
+                                    qtdCm20++
+                                }else if(dados[i].tamanho == 2){
+                                    qtdCm25++
+                                }else if(dados[i].tamanho == 3){
+                                    qtdCm30++
+                                }else if(dados[i].tamanho == 4){
+                                    qtdCm35++
+                                }
+                            }
+                            dado = dados[dados.length - 1]
+                            div_ticket.innerHTML = dado.ticket_medio
+                            div_nome.innerHTML = dado.nome
+                            div_valorizacao_media.innerHTML = dado.valorizacao_media
+                            div_maior_valorizacao.innerHTML = dado.maior_valorizacao
+                            div_total_bolsas.innerHTML = dado.total_bolsas_registradas
+                            criarGrafico(
+                                "graficoValor",
+                                'bar',
+                                ["valor pago", "valor valorizado"],
+                                [dado.preco, dado.valorFinal]
+                            );
+                               criarGrafico(
+                                "graficoTamanho",
+                                'bar',
+                                ["20 cm", "25 cm", "30 cm", "35 cm"],
+                                [qtdCm20, qtdCm25, qtdCm30, qtdCm35]
+                            );
+
+
+                        })
+                    } else {
+                        console.error("Erro ao buscar dados atualizados")
+                    }
+                })
+                .catch(erro => console.error("Erro de conexão:", erro))
+
+
+        }
+        function criarGrafico(idCanvas, tipo, labels, dados, cores = null) {
+
             const ctx = document.getElementById(idCanvas);
 
             return new Chart(ctx, {
@@ -113,7 +170,7 @@
             });
         }
 
-       
+
         criarGrafico(
             "graficoCouros",
             'doughnut',
@@ -121,15 +178,7 @@
             [20, 25, 30, 35]
         );
 
-       
-        criarGrafico(
-            "graficoTamanho",
-            'bar',
-            ["20 cm", "25 cm", "30 cm", "35 cm"],
-            [2, 8, 5, 7]
-        );
 
-       
         criarGrafico(
             "graficoHardware",
             'bar',
@@ -137,14 +186,10 @@
             [4, 8, 10, 6, 4]
         );
 
-       
-        criarGrafico(
-            "graficoValor",
-            'bar',
-            ["valor pago", "valor valorizado"],
-            [60000, 96000]
-        );
+
+        carregarDados()
     </script>
 
 </body>
+
 </html>

@@ -22,7 +22,7 @@ function autenticar(req, res) {
                         console.log(resultadoAutenticar)
 
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].ldUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         sobrenome: resultadoAutenticar[0].sobrenome,
                                         email: resultadoAutenticar[0].email,
@@ -70,7 +70,7 @@ function cadastrar(req, res) {
     }else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, sobrenome, tktmedio)
+        usuarioModel.cadastrar(nome,sobrenome,email,senha, tktmedio)
             .then(
                 function (resultado) {
                     res.json(resultado);
